@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tvastra 2020</title>
+    <link rel="stylesheet" href="./../css/tagify.css" />
+    <%- include ('partials/head.ejs') %>
+  </head>
+  <body>
+    <header><%- include ('partials/header.ejs') %></header>
+    <% if(error) {%> <% if(errorType === 'Success') { %>
+    <div class="error_container error_container--success">
+      <div class="col--1">
+        <div class="error_container__icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+      </div>
+      <div class="col--2">
+        <div class="error_container__title heading-3">Success</div>
+        <span class="para-1 error" id="cancelLogin"><%= error %></span>
+      </div>
+      <div class="col--3">
+        <div class="error_container__icon" id="cross">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+    </div>
+    <% } %> <% if(errorType === 'Failure') { %>
+    <div class="error_container">
+      <div class="col--1">
+        <div class="error_container__icon">
+          <i class="fas fa-times-circle"></i>
+        </div>
+      </div>
+      <div class="col--2">
+        <div class="error_container__title heading-3">Failure</div>
+        <span class="para-1 error" id="cancelLogin"><%= error %> </span>
+      </div>
+      <div class="col--3">
+        <div class="error_container__icon" id="cross">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+    </div>
+    <% } %> <% if(errorType === 'Info') { %>
+    <div class="error_container error_container--info">
+      <div class="col--1">
+        <div class="error_container__icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+      </div>
+      <div class="col--2">
+        <div class="error_container__title heading-3">Info</div>
+        <span class="para-1 error" id="cancelLogin"><%= error %></span>
+      </div>
+      <div class="col--3">
+        <div class="error_container__icon" id="cross">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+    </div>
+    <% } %> <% } %>
+
+    <section class="hero">
+      <div class="container hero__container">
+        <h1 class="heading-1 hero__container__heading">
+          Find Affordable Healthcare
+        </h1>
+        <p class="para hero__container__para">
+          Join the thousands of others who have exercised their right to quality
+          healthcare at a price you can afford.
+        </p>
+        <form action="/filter_search" method="POST">
+          <div class="grid hero__container__field">
+            <div class="hero__container__field__search_location">
+              <input
+                id="loc_search"
+                type="text"
+                name="locality"
+                placeholder="Ahmedabad"
+                class="hero__container__field__search_location__district"
+                list="localities"
+                id="auto-complete"
+                autocomplete="off"
+              />
+              <div class="city_autocomplete" id="city-list"></div>
+              <span class="hero__container__field__search_location__map-marker"
+                ><i class="fas fa-map-marker-alt"></i
+              ></span>
+              <span
+                id="gps-button"
+                class="hero__container__field__search_location__crosshairs"
+                id="location_i"
+                onclick="findCity(this)"
+                ><img
+                  src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/gps.png"
+                  alt=""
+              /></span>
+            </div>
+            <div class="hero__container__field__search__doctor">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search for doctors, hospitals and treatments"
+                id="search"
+                class="hero__container__field__search"
+                autocomplete="off"
+              />
+              <div class="match-auto_complete" id="match-list"></div>
+            </div>
+
+            <button class="hero__container__field__search__button">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="how_it_works">
+      <div class="container how_it_works__container">
+        <h2 class="heading-2 how_it_works__container__heading">How it works</h2>
+        <p class="para how_it_works__container__para">
+          Various facilites are provided here. But there is a protocol which
+          needs to be followed so that you may get the service at its best.
+        </p>
+        <div class="grid how_it_works__grid">
+          <div
+            class="how_it_works__grid__option how_it_works__grid__option-1 how_it_works__grid__option-active"
+          >
+            <span class="heading-3 how_it_works__grid__option__number">01</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">
+              Fix Consultation
+            </h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works_grid__option__desc-1 how_it_works__grid__option__desc-expand"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img1.png"
+              alt="Fix Consultation"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Fix Consulation
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+          <div class="how_it_works__grid__option how_it_works__grid__option-2">
+            <span class="heading-3 how_it_works__grid__option__number">02</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">
+              Upload Medical Reports
+            </h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works__grid__option__desc-2"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img2.png"
+              alt="Upload Medical Reports"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Upload Medical Reports
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+          <div class="how_it_works__grid__option how_it_works_grid__option-3">
+            <span class="heading-3 how_it_works__grid__option__number">03</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">
+              Consult with doctor
+            </h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works__grid__option__desc-3"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img3.jpeg"
+              alt="Consult with doctor"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Consult with doctor
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+          <div class="how_it_works__grid__option how_it_works_grid__option-4">
+            <span class="heading-3 how_it_works__grid__option__number">04</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">
+              Fix Surgery
+            </h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works__grid__option__desc-4"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img4.jpeg"
+              alt="Fix Surgery"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Fix Surgery
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+          <div class="how_it_works__grid__option how_it_works_grid__option-5">
+            <span class="heading-3 how_it_works__grid__option__number">05</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">
+              Hospital Sent Estimates
+            </h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works__grid__option__desc-5"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img5.jpg"
+              alt="Hospital Sent Estimates"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Hospital Sent Estimates
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+          <div class="how_it_works__grid__option how_it_works__grid__option-6">
+            <span class="heading-3 how_it_works__grid__option__number">06</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">Payment</h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works__grid__option__desc-6"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img6.jpg"
+              alt="Payment"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Payment
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+          <div class="how_it_works__grid__option how_it_works__grid__option-6">
+            <span class="heading-3 how_it_works__grid__option__number">07</span>
+            <h3 class="heading-3 how_it_works__grid__option__text">
+              Surgery Completed
+            </h3>
+          </div>
+          <div
+            class="how_it_works__grid__option__desc how_it_works__grid__option__desc-7"
+          >
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img7.jpeg"
+              alt="Surgery Completed"
+              class="how_it_works__grid__option__desc__image"
+            />
+            <h3 class="heading-3 how_it_works__grid__option__desc__heading">
+              Surgery Completed
+            </h3>
+            <p class="para how_it_works__grid__option__desc__para">
+              This depicts that user will have to fix appointment first when it
+              selects a particular doctor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="world_class_doctors">
+      <div class="container world_class_doctors__container">
+        <h2 class="heading-2 world_class_doctors__heading">
+          World class expert doctors!
+        </h2>
+        <p class="para world_class_doctors__para">
+          The university of Texas Southwestern Medical Center has long been a
+          world-renowed research hospital. But until the '80s, you couldn't get
+          there. Now, with the addition of the Aston Center and Zale Lipshy
+          Hospital, UT Southwestern is also a mecca for patient care.
+        </p>
+        <div
+          class="grid world_class_doctors__container__cards carousel_container"
+        >
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-1 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Duke Sanson
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Neuro Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Chain Department Of Neurological Surgery
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                Australia
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-2 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Rose Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Plastic Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Department Of Plastic and Reconstructive Surgery
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                Dubai
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-3 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Georgia Peter
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Breast Cancer Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Director, UT Southwest
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                London
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-4 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Charlie Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Cardiac Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                MBBS,MD,FRCP,MRCP,Fellowship
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                New Delhi, India
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-5 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Charlie Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Cardiac Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                MBBS,MD,FRCP,MRCP,Fellowship
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                New Delhi, India
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-6 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Charlie Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Cardiac Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                MBBS,MD,FRCP,MRCP,Fellowship
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                New Delhi, India
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-7 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Charlie Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Cardiac Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                MBBS,MD,FRCP,MRCP,Fellowship
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                New Delhi, India
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-8 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Charlie Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Cardiac Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                MBBS,MD,FRCP,MRCP,Fellowship
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                New Delhi, India
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-3 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Georgia Peter
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Breast Cancer Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Director, UT Southwest
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                London
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-3 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Georgia Peter
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Breast Cancer Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Director, UT Southwest
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                London
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-3 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Georgia Peter
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Breast Cancer Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Director, UT Southwest
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                London
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-3 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Georgia Peter
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Breast Cancer Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Director, UT Southwest
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                London
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-2 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Rose Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Plastic Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Department Of Plastic and Reconstructive Surgery
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                Dubai
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-2 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Rose Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Plastic Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Department Of Plastic and Reconstructive Surgery
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                Dubai
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-2 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Rose Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Plastic Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Department Of Plastic and Reconstructive Surgery
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                Dubai
+              </p>
+            </div>
+          </div>
+          <div
+            class="world_class_doctors__container__cards__card world_class_doctors__container__cards__card-2 carousel_item"
+          >
+            <div
+              class="world_class_doctors__container__cards__card__description"
+            >
+              <h3
+                class="heading-3 world_class_doctors__container__cards__card__description__name"
+              >
+                Rose Moon
+              </h3>
+              <p
+                class="para world_class_doctors__container__cards__card__description__designation"
+              >
+                Plastic Surgeon
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__qualification"
+              >
+                Department Of Plastic and Reconstructive Surgery
+              </p>
+              <p
+                class="para world_class_doctors__container__cards__card__description__location"
+              >
+                Dubai
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="world_class_doctors__container__dots">
+          <div
+            class="world_class_doctors__container__dots__dot world_class_doctors__container__dots__dot-1 dot_active carousel_dot"
+            data-number="0"
+          ></div>
+          <div
+            class="world_class_doctors__container__dots__dot world_class_doctors__container__dots__dot-2 carousel_dot"
+            data-number="1"
+          ></div>
+          <div
+            class="world_class_doctors__container__dots__dot world_class_doctors__container__dots__dot-3 carousel_dot"
+            data-number="2"
+          ></div>
+          <div
+            class="world_class_doctors__container__dots__dot world_class_doctors__container__dots__dot-4 carousel_dot"
+            data-number="3"
+          ></div>
+        </div>
+      </div>
+    </section>
+    <section class="medical_treatments">
+      <div class="container medical_treatments__container">
+        <h2 class="heading-2 medical_treatments__heading">
+          Featured Medical Treatments
+        </h2>
+        <p class="para medical_treatments__para">
+          The hospital provides various medical treatments done by our expert
+          doctors. Your health is our priority.
+        </p>
+        <div class="grid medical_treatments__grid">
+          <div
+            class="medical_treatments__grid__card medical_treatments__grid__card-1"
+          >
+            <h3 class="heading-3 medical_treatments__grid__card__type">
+              Dentistry
+            </h3>
+            <p class="para medical_treatments__grid__card__text">
+              50+ specialists
+            </p>
+          </div>
+          <div
+            class="medical_treatments__grid__card medical_treatments__grid__card-2"
+          >
+            <h3 class="heading-3 medical_treatments__grid__card__type">
+              Cancer
+            </h3>
+            <p class="para medical_treatments__grid__card__text">
+              50+ specialists
+            </p>
+          </div>
+          <div
+            class="medical_treatments__grid__card medical_treatments__grid__card-3"
+          >
+            <h3 class="heading-3 medical_treatments__grid__card__type">
+              Cardiology
+            </h3>
+            <p class="para medical_treatments__grid__card__text">
+              50+ specialists
+            </p>
+          </div>
+          <div
+            class="medical_treatments__grid__card medical_treatments__grid__card-4"
+          >
+            <h3 class="heading-3 medical_treatments__grid__card__type">
+              Multi Organ Transplant
+            </h3>
+            <p class="para medical_treatments__grid__card__text">
+              50+ specialists
+            </p>
+          </div>
+          <div
+            class="medical_treatments__grid__card medical_treatments__grid__card-5"
+          >
+            <h3 class="heading-3 medical_treatments__grid__card__type">
+              Orthopedics Surgery
+            </h3>
+            <p class="para medical_treatments__grid__card__text">
+              50+ specialists
+            </p>
+          </div>
+          <div
+            class="medical_treatments__grid__card medical_treatments__grid__card-6"
+          >
+            <h3 class="heading-3 medical_treatments__grid__card__type">
+              Infertility Treatment
+            </h3>
+            <p class="para medical_treatments__grid__card__text">
+              50+ specialists
+            </p>
+          </div>
+        </div>
+        <div class="medical_treatments__dots">
+          <div
+            class="medical_treatments__dots__dot medical_treatments__dots__dot-1"
+          ></div>
+          <div
+            class="medical_treatments__dots__dot medical_treatments__dots__dot-2"
+          ></div>
+          <div
+            class="medical_treatments__dots__dot medical_treatments__dots__dot-3"
+          ></div>
+        </div>
+      </div>
+    </section>
+    <section class="services">
+      <div class="container services__container">
+        <h2 class="heading-2 services__heading">Exclusive Services</h2>
+        <p class="para services__para">
+          We want you to be comfortable and thus apart from treating your
+          illness, we provide you with other services that can ease you.
+        </p>
+        <div class="grid services__grid">
+          <div class="services__grid__choice">
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/Icons-01.png"
+              class="services__grid__choice__image"
+            />
+            <h3 class="heading-3 services__grid__choice__text">TRAVEL</h3>
+          </div>
+          <div class="services__grid__choice">
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/Icons-02.png"
+              class="services__grid__choice__image"
+            />
+            <h3 class="heading-3 services__grid__choice__text">FOOD</h3>
+          </div>
+          <div class="services__grid__choice">
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/Icons-03.png"
+              class="services__grid__choice__image"
+            />
+            <h3 class="heading-3 services__grid__choice__text">ACCOMODATION</h3>
+          </div>
+          <div class="services__grid__choice">
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/Icons-07.png"
+              class="services__grid__choice__image"
+            />
+            <h3 class="heading-3 services__grid__choice__text">LABS</h3>
+          </div>
+          <div class="services__grid__choice">
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/Icons-04.png"
+              class="services__grid__choice__image"
+            />
+            <h3 class="heading-3 services__grid__choice__text">REPORTS</h3>
+          </div>
+          <div class="services__grid__choice">
+            <img
+              src="https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/Icons-12.png"
+              class="services__grid__choice__image"
+            />
+            <h3 class="heading-3 services__grid__choice__text">OTHERS</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="help"><%- include ('partials/help.ejs') %></section>
+    <footer class="footer"><%- include ('partials/footer.ejs') %></footer>
+    <div class="border"></div>
+    <script src="./../tagify.js"></script>
+    <script src="../autocomp.js"></script>
+    <script src="error.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
