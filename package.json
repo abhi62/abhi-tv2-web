@@ -8,8 +8,7 @@
     "start": "node src/server.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git@workspace.konfinity.com:html-css-demo/tvastra.git"
+    "type": "git"
   },
   "author": "",
   "license": "ISC",
